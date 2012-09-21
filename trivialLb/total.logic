@@ -1,0 +1,3 @@
+// Total the salaries of all employees.
+_total[] = t -> float[32](t).
+_total[] = t <- agg<<t = total(s)>> salaryOf[_] = s.

@@ -1,0 +1,8 @@
+open workspace
+
+transaction
+exec --file instance.logic
+commit
+
+close
+

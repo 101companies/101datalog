@@ -1,0 +1,39 @@
+open workspace
+
+transaction
+
+addBlock <doc>
+
+// Departments are identified by a name of type string.
+Department(d), hasDepartmentName(d:n) -> string(n).
+
+// Each department belongs to a specific company.
+companyOf[d] = c -> Department(d), Company(c).
+
+// In fact, each department must belong to a company.
+Department(d) -> companyOf[d] = _.
+
+// Each department may have an ancestor department.
+ancestorOf[d1] = d2 -> Department(d1), Department(d2).
+
+</doc>
+
+exec <doc>
+
++Department("Research"),
+	+companyOf["Research"] = "Acme".
++Department("Development"),
+	+companyOf["Development"] = "Acme",
+	+Department("Dev1"),
+		+companyOf["Dev1"] = "Acme",
+		+ancestorOf["Dev1"] = "Development",
+	+Department("Dev2"),
+		+companyOf["Dev2"] = "Acme",
+		+ancestorOf["Dev2"] = "Development".
++Department("AnotherDepartment"),
+	+companyOf["AnotherDepartment"] = "AnotherCorporation".
+
+</doc>
+
+commit
+

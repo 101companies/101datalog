@@ -1,0 +1,3 @@
+// Cut the salaries of all employees of the Acme corporation.
+*salaryOf[e] = s / 2 <- salaryOf@prev[e] = s, employerOf[e] = "Acme".
+

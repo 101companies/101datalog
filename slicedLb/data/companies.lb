@@ -1,0 +1,24 @@
+open workspace
+
+transaction
+
+addBlock <doc>
+
+// Companies are identified by a name of type string.
+Company(c), hasCompanyName(c:n) -> string(n).
+
+</doc>
+
+exec <doc>
+
++Company("Acme").
++Company("AnotherCorporation").
+
+</doc>
+
+commit
+
+
+
+
+

@@ -1,0 +1,21 @@
+// Departments are identified by a name of type string.
+Department(d), hasDepartmentName(d:n) -> string(n).
+
+// Each department may have an ancestor department.
+ancestorOf[d1] = d2 -> Department(d1), Department(d2).
+
+// Employees are identified by a name of type string.
+Employee(e), hasEmployeeName(e:n) -> string(n).
+
+// Each employee may be associated with a department.
+departmentOf[e] = d -> Employee(e), Department(d).
+
+// In fact, each employee must have an associated department.
+Employee(e) -> departmentOf[e] = _.
+
+// Each employee may receive a salary.
+salaryOf[e] = s -> Employee(e), float[32](s).
+
+// In fact, each employee must receive a salary.
+Employee(e) -> salaryOf[e] = _.
+

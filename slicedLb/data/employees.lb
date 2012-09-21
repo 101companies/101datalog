@@ -1,0 +1,51 @@
+open workspace
+
+transaction
+
+addBlock <doc>
+
+// Employees are identified by a name of type string.
+Employee(e), hasEmployeeName(e:n) -> string(n).
+
+// Each employee may be associated with a department.
+departmentOf[e] = d -> Employee(e), Department(d).
+
+// In fact, each employee must have an associated department.
+Employee(e) -> departmentOf[e] = _.
+
+// Each employee has an employer.
+employerOf[e] = c <- departmentOf[e] = d, companyOf[d] = c.
+
+// Each employee may receive a salary.
+salaryOf[e] = s -> Employee(e), float[32](s).
+
+// In fact, each employee must receive a salary.
+Employee(e) -> salaryOf[e] = _.
+
+</doc>
+
+exec <doc>
+
++Employee("Fred"),
+	+departmentOf["Fred"] = "Research",
+	+salaryOf["Fred"] = 88888.
++Employee("Marie"),
+	+departmentOf["Marie"] = "Development",
+	+salaryOf["Marie"] = 77777.
++Employee("Bob"),
+	+departmentOf["Bob"] = "Dev1",
+	+salaryOf["Bob"] = 77776.
++Employee("Alice"),
+	+departmentOf["Alice"] = "Dev2",
+	+salaryOf["Alice"] = 77775.
++Employee("Ralf"),
+	+departmentOf["Ralf"] = "Dev2",
+	+salaryOf["Ralf"] = 4711.
++Employee("Marta"),
+	+departmentOf["Marta"] = "AnotherDepartment",
+	+salaryOf["Marta"] = 88.
+
+</doc>
+
+commit
+

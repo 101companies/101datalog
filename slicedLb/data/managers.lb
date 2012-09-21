@@ -1,0 +1,28 @@
+// It is critical that schema and instance are processed here in the same transaction because the constraint that each department must have a manager can only be met by adding the additional instance data.
+
+open workspace
+
+transaction
+
+addBlock <doc>
+
+// Each department may have an employee who is the manager.
+managerOf[d] = m -> Department(d), Employee(m), departmentOf[m] = d.
+
+// In fact, each department must have a manager.
+Department(d) -> managerOf[d] = _.
+
+</doc>
+
+exec <doc>
+
++managerOf["Research"] = "Fred".
++managerOf["Development"] = "Marie".
++managerOf["Dev1"] = "Bob",
++managerOf["Dev2"] = "Alice".
++managerOf["AnotherDepartment"] = "Marta".
+
+</doc>
+
+commit
+

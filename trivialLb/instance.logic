@@ -1,0 +1,23 @@
++Department("Research").
++Department("Development"),
+	+Department("Dev1"),
+		+ancestorOf["Dev1"] = "Development",
+	+Department("Dev2"),
+		+ancestorOf["Dev2"] = "Development".
+
++Employee("Fred"),
+	+departmentOf["Fred"] = "Research",
+	+salaryOf["Fred"] = 88888.
++Employee("Marie"),
+	+departmentOf["Marie"] = "Development",
+	+salaryOf["Marie"] = 77777.
++Employee("Bob"),
+	+departmentOf["Bob"] = "Dev1",
+	+salaryOf["Bob"] = 77776.
++Employee("Alice"),
+	+departmentOf["Alice"] = "Dev2",
+	+salaryOf["Alice"] = 77775.
++Employee("Ralf"),
+	+departmentOf["Ralf"] = "Dev2",
+	+salaryOf["Ralf"] = 4711.
+

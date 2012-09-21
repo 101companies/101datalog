@@ -1,0 +1,6 @@
+open workspace
+transaction
+query -S total
+commit
+close
+
