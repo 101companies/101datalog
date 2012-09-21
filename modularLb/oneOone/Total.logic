@@ -1,0 +1,16 @@
+block(`Total) {
+
+inactive(),
+
+clauses(`{
+
+// Total the salaries of all employees per company.
+_[c] = t -> Schema:Company(c), float[32](t).
+_[c] = t <- agg<<t = total(s)>> 
+	Schema:salaryOf[e] = s,
+	Schema:employerOf[e] = c.
+
+})
+
+} <-- .
+

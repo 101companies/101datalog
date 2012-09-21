@@ -1,0 +1,4 @@
+// Total the salaries of all employees per company.
+_total[c] = t -> Company(c), float[32](t).
+_total[c] = t <- agg<<t = total(s)>> salaryOf[e] = s, employerOf[e] = c.
+

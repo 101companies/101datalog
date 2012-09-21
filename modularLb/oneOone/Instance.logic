@@ -1,0 +1,55 @@
+block(`Instance) {
+
+inactive(),
+
+clauses(`{
+
++Schema:Company("Acme").
+
++Schema:Department("Research"),
+	+Schema:companyOf["Research"] = "Acme",
+	+Schema:managerOf["Research"] = "Fred".
++Schema:Department("Development"),
+	+Schema:companyOf["Development"] = "Acme",
+	+Schema:managerOf["Development"] = "Marie".
+	+Schema:Department("Dev1"),
+		+Schema:companyOf["Dev1"] = "Acme",
+		+Schema:ancestorOf["Dev1"] = "Development",
+		+Schema:managerOf["Dev1"] = "Bob",
+	+Schema:Department("Dev2"),
+		+Schema:companyOf["Dev2"] = "Acme",
+		+Schema:ancestorOf["Dev2"] = "Development",
+		+Schema:managerOf["Dev2"] = "Alice".
+
++Schema:Employee("Fred"),
+	+Schema:departmentOf["Fred"] = "Research",
+	+Schema:salaryOf["Fred"] = 88888.
++Schema:Employee("Marie"),
+	+Schema:departmentOf["Marie"] = "Development",
+	+Schema:salaryOf["Marie"] = 77777.
++Schema:Employee("Bob"),
+	+Schema:departmentOf["Bob"] = "Dev1",
+	+Schema:salaryOf["Bob"] = 77776.
++Schema:Employee("Alice"),
+	+Schema:departmentOf["Alice"] = "Dev2",
+	+Schema:salaryOf["Alice"] = 77775.
++Schema:Employee("Ralf"),
+	+Schema:departmentOf["Ralf"] = "Dev2",
+	+Schema:salaryOf["Ralf"] = 4711.
+
+// Another corporation to challenge functionality.
+
++Schema:Company("AnotherCorporation").
+
++Schema:Department("AnotherDepartment"),
+	+Schema:companyOf["AnotherDepartment"] = "AnotherCorporation",
+	+Schema:managerOf["AnotherDepartment"] = "Marta".
+
++Schema:Employee("Marta"),
+	+Schema:departmentOf["Marta"] = "AnotherDepartment",
+	+Schema:salaryOf["Marta"] = 88.
+
+})
+
+} <-- .
+

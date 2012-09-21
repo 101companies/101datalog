@@ -1,0 +1,21 @@
+// Managers get higher salaries then other employees in the same department.
+Department(d),
+managerOf[d] = m,
+salaryOf[m] = s1,
+Employee(e), 
+departmentOf[e] = d,
+salaryOf[e] = s2,
+! e = m
+	->
+		s1 > s2.
+
+// Managers get higher salaries then managers of subdepartments.
+Department(d1),
+managerOf[d1] = m1,
+salaryOf[m1] = s1,
+ancestorOf[d1] = d2,
+managerOf[d2] = m2,
+salaryOf[m2] = s2
+	->
+		s1 < s2.
+

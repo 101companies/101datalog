@@ -1,0 +1,47 @@
++Company("Acme").
+
++Department("Research"),
+	+companyOf["Research"] = "Acme",
+	+managerOf["Research"] = "Fred".
++Department("Development"),
+	+companyOf["Development"] = "Acme",
+	+managerOf["Development"] = "Marie".
+	+Department("Dev1"),
+		+companyOf["Dev1"] = "Acme",
+		+ancestorOf["Dev1"] = "Development",
+		+managerOf["Dev1"] = "Bob",
+	+Department("Dev2"),
+		+companyOf["Dev2"] = "Acme",
+		+ancestorOf["Dev2"] = "Development",
+		+managerOf["Dev2"] = "Alice".
+
++Employee("Fred"),
+	+departmentOf["Fred"] = "Research",
+	+salaryOf["Fred"] = 88888.
++Employee("Marie"),
+	+departmentOf["Marie"] = "Development",
+	+salaryOf["Marie"] = 77777.
++Employee("Bob"),
+	+departmentOf["Bob"] = "Dev1",
+	+salaryOf["Bob"] = 77776.
++Employee("Alice"),
+	+departmentOf["Alice"] = "Dev2",
+	+salaryOf["Alice"] = 77775.
++Employee("Ralf"),
+	+departmentOf["Ralf"] = "Dev2",
+	+salaryOf["Ralf"] = 4711,
+	+mentorOf["Ralf"] = "Marie".
+
+// Another corporation to challenge functionality.
+
++Company("AnotherCorporation").
+
++Department("AnotherDepartment"),
+	+companyOf["AnotherDepartment"] = "AnotherCorporation",
+	+managerOf["AnotherDepartment"] = "Marta",
+
++Employee("Marta"),
+	+departmentOf["Marta"] = "AnotherDepartment",
+	+salaryOf["Marta"] = 88,
+        +mentorOf["Marta"] = "Marie".
+

@@ -1,0 +1,57 @@
+block(`Schema) {
+
+export(`{
+
+// Companies are identified by a name of type string.
+Company(c), hasCompanyName(c:n) -> string(n).
+
+// Departments are identified by a name of type string.
+Department(d), hasDepartmentName(d:n) -> string(n).
+
+// Each department belongs to a specific company.
+companyOf[d] = c -> Department(d), Company(c).
+
+// Each department may have an ancestor department.
+ancestorOf[d1] = d2 -> Department(d1), Department(d2).
+
+// Employees are identified by a name of type string.
+Employee(e), hasEmployeeName(e:n) -> string(n).
+
+// Each employee may be associated with a department.
+departmentOf[e] = d -> Employee(e), Department(d).
+
+// Each employee may receive a salary.
+salaryOf[e] = s -> Employee(e), float[32](s).
+
+// Each employee has an employer.
+employerOf[e] = c -> Employee(e), Company(c).
+
+// Each department may have a manager.
+managerOf[d] = m -> Department(d), Employee(m).
+
+}),
+
+clauses(`{
+
+// The manager of a department is also an employee of the department.
+managerOf[d] = m -> departmentOf[m] = d.
+
+// Each department must belong to a company.
+Department(d) -> companyOf[d] = _.
+
+// Each employee must have an associated department.
+Employee(e) -> departmentOf[e] = _.
+
+// Each department must have a manager.
+Department(d) -> managerOf[d] = _.
+
+// Each employee must receive a salary.
+Employee(e) -> salaryOf[e] = _.
+
+// Each employee has an employer.
+employerOf[e] = c <- departmentOf[e] = d, companyOf[d] = c.
+
+})
+
+} <-- .
+

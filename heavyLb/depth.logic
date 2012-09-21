@@ -1,0 +1,26 @@
+// Depth of a department (counting from the top)
+_depthOfDepartment[d] = x -> Department(d), uint[32](x).
+
+// Depth of a top-level department is 1.
+_depthOfDepartment[d] = 1 
+	<- 
+		Department(d), 
+		! ancestorOf[d] = _.
+
+// Depth of non-top-level department is increment of parent's depth.
+_depthOfDepartment[d] = x+1
+	<- 
+		ancestorOf[d] = p,
+		_depthOfDepartment[p] = x.
+
+// Depth of a company
+_depthOfCompany[c] = x -> Company(c), uint[32](x).
+
+// Depth of a company is the max of its departments' depths.
+_depthOfCompany[c] = x
+	<-
+		agg<<x = max(y)>>
+			Department(d),
+			companyOf[d] = c,
+			_depthOfDepartment[d] = y.
+

@@ -1,0 +1,16 @@
+block(`Cut) {
+
+inactive(),
+
+clauses(`{
+
+// Cut the salaries of all employees of the Acme corporation.
+*Schema:salaryOf[e] = s / 2 
+	<- 
+		Schema:salaryOf@prev[e] = s, 
+		Schema:employerOf[e] = "Acme".
+
+})
+
+} <-- .
+
